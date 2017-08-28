@@ -49,3 +49,7 @@ In order to tune P, I and D gains, I used a common method called [Twiddle](https
 In self-driving car, there is a challenge in evaluating the performance error before knowing if the new Twiddled parameter is effective. To measure performance, we need to let the car stable first (I picked 100 sampling steps) then measure the Summ of Squared Error track deviation through a period (I picked 2000 sample steps. Need to cover about 1 lap to fully understand the car performance in a whole lap) under src/PID.cpp.
 
 I let my car runs for half an hour to tune the PID controllers and fixed the final gains under src/main.cpp.
+
+[YOUTUBE Link](https://www.youtube.com/watch?v=4U-JUl5dcMU)
+
+
