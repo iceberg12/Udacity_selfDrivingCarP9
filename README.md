@@ -36,53 +36,16 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 3. Compile: `cmake .. && make`
 4. Run it: `./pid`. 
 
-## Editor Settings
+## Logics
 
+References: https://github.com/jeremy-shannon/CarND-PID-Control-Project.
 
+In this project, I used two PID controllers to control the steering and the throttle of a simulated car based on the deviation it makes from the center of the lane. The discussion about PID on these two variables can be understood better through this [link](https://www.youtube.com/watch?v=4Y7zG48uHRo&feature=youtu.be). Note that the outputs from these PIDs must be in the range [-1,1]. However, tuning P, I, D gains is usually a challenge due to different turning scenarios on the road. 
 
-## Code Style
+In order to tune P, I and D gains, I used a common method called [Twiddle](https://www.youtube.com/watch?v=2uQ2BSzDvXs) explained by Sebastian Thrun. The algorithm optimizes one parameter at a time, checking if increasing or descreasing by a certain optimizing step helps to reduce the performance error. If the error is reduced, the algorithm increases the step of this parameter; otherwise it reduces the step. In either case, the algorithm will continue to the next parameter. The optimization will loop back once all parameters have been gone through.
 
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+## Implementation
 
-## Project Instructions and Rubric
+In self-driving car, there is a challenge in evaluating the performance error before knowing if the new Twiddled parameter is effective. To measure performance, we need to let the car stable first (I picked 100 sampling steps) then measure the Summ of Squared Error track deviation through a period (I picked 2000 sample steps. Need to cover about 1 lap to fully understand the car performance in a whole lap) under src/PID.cpp.
 
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
-
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/f1820894-8322-4bb3-81aa-b26b3c6dcbaf/lessons/e8235395-22dd-4b87-88e0-d108c5e5bbf4/concepts/6a4d8d42-6a04-4aa6-b284-1697c0fd6562)
-for instructions and the project rubric.
-
-## Hints!
-
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
-
-## Call for IDE Profiles Pull Requests
-
-Help your fellow students!
-
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
-
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
-
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
-
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
-
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
-
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
+I let my car runs for half an hour to tune the PID controllers and fixed the final gains under src/main.cpp.
