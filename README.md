@@ -1,7 +1,8 @@
 # CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
+[Self-Driving Car Engineer Nanodegree Program]
 
 ---
+This project is to build a controller that adjust the steering and speed of an self-driving car automatically to drive on the road.
 
 ## Dependencies
 
@@ -37,12 +38,7 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 
 ## Editor Settings
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
 
 ## Code Style
 
